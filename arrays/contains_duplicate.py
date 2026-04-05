@@ -28,7 +28,7 @@
 
 #code
 
-class solution:
+class Solution:
     def contains_duplicate(self,nums):
         freq = {}
         for num in nums:
@@ -37,17 +37,20 @@ class solution:
             else:
                 freq[num] = 1
         return False
- 
-A = solution()
-print(A.contains_duplicate([1,2,3,1]))
+ #time complexity ---->>>>O(n)
 
 
-
-#  other way
-
-class solution:
+#  Optimized Way
+class SolutionOptimized:
     def contains_duplicate(self,nums):
         return len(nums) != len(set(nums))
     
-b= solution()
-print(b.contains_duplicate([1,2,3,4]))
+ #time complexity ---->>>>O(n)
+
+
+if __name__== "__main__":
+    s1 = Solution()
+    print(s1.contains_duplicate([1,2,3,1]))
+
+    s2=SolutionOptimized()
+    print(s2.contains_duplicate([1,2,3,4]))
