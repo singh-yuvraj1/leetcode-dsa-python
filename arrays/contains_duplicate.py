@@ -28,26 +28,26 @@
 
 #code
 
-# class solution:
-#     def contains_duplicate(self,nums):
-#         freq = {}
-#         for num in nums:
-#             if num in freq:
-#                 return True
-#             else:
-#                 freq[num] = 1
-#         return False
+class solution:
+    def contains_duplicate(self,nums):
+        freq = {}
+        for num in nums:
+            if num in freq:
+                return True
+            else:
+                freq[num] = 1
+        return False
  
-# A = solution()
-# print(A.contains_duplicate([1,2,3,1]))
+A = solution()
+print(A.contains_duplicate([1,2,3,1]))
 
 
 
 #  other way
 
-# class solution:
-#     def contains_duplicate(self,nums):
-#         return len(nums) != len(set(nums))
+class solution:
+    def contains_duplicate(self,nums):
+        return len(nums) != len(set(nums))
     
-# b= solution()
-# print(b.contains_duplicate([1,2,3,4]))
+b= solution()
+print(b.contains_duplicate([1,2,3,4]))
