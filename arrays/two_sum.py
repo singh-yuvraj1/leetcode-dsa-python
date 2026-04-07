@@ -26,18 +26,18 @@
 # Only one valid answer exists.
 
 #Solution
-class Solution(object):
-    def twoSum(self, nums, target):
-        d = {}
-        for i in range(len(nums)):
-            diff = target - nums[i]
+# class Solution(object):
+#     def twoSum(self, nums, target):
+#         d = {}
+#         for i in range(len(nums)):
+#             diff = target - nums[i]
             
-            if diff in d:
-                return [d[diff], i]
+#             if diff in d:
+#                 return [d[diff], i]
             
-            d[nums[i]] = i
+#             d[nums[i]] = i
 
-if __name__== "__main__":
+# if __name__== "__main__":
     
-    a = Solution()
-    print(a.twoSum([2,7,11,15], 9))
+#     a = Solution()
+#     print(a.twoSum([2,7,11,15], 9))
