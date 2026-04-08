@@ -42,3 +42,33 @@ if __name__== "__main__":
     nums2 = [2,0,1]
     a.sortColors(nums2)
     print(nums2)  # [0,1,2]                 
+
+
+## Time Complexity: O(n) where n is the length of the input array. We traverse the array once.
+## Space Complexity: O(1) since we are sorting the array in place and using only a constant amount of extra space for the pointers.
+
+
+#--------------------------------Another Way to solve-------------------------------but not good as the above one because it requires two passes through the array, which results in a time complexity of O(n) + O(n) = O(2n) = O(n). The space complexity is O(1) since we are modifying the array in place and not using any additional data structures.
+class Solution1(object):
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        count0 = nums.count(0)
+        count1 = nums.count(1)
+        count2 = nums.count(2)
+
+        nums[:count0] = [0] * count0
+        nums[count0:count0+count1] = [1] * count1
+        nums[count0+count1:] = [2] * count2
+
+if __name__== "__main__":
+    b = Solution1()
+    nums1 = [2,0,2,1,1,0]
+    b.sortColors(nums1)
+    print(nums1)  # [0,0,1,1,2,2]
+
+    nums2 = [2,0,1]
+    b.sortColors(nums2)
+    print(nums2)  # [0,1,2]        
