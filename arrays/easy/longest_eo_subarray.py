@@ -36,7 +36,7 @@
 # 1 <= nums[i] <= 100 
 # 1 <= threshold <= 100
 
-
+#---------------------------------Brute Force Solution-------------------------------
 class Solutionn(object):
     def longestAlternatingSubarray(self, nums, threshold):
         n = len(nums)
@@ -68,3 +68,49 @@ if __name__== "__main__":
     nums3 = [2,3,4,5]
     threshold3 = 4
     print(a.longestAlternatingSubarray(nums3, threshold3))  # 3 
+
+
+
+## Time Complexity: O(n^2) where n is the length of the input array. We have two nested loops, each iterating through the array.
+## Space Complexity: O(1) since we are using only a constant amount of extra space to store the maximum length of the subarray and the current length of the alternating subarray.
+
+
+#---------------------------------Optimal Solution-------------------------------Two pointer approach/ Sliding Window approach
+class Solution(object):
+    def longestAlternatingSubarray(self, nums, threshold):
+        n = len(nums)
+        max_len = 0
+        i = 0
+        
+        while i < n:
+            if nums[i] % 2 == 0 and nums[i] <= threshold:
+                j = i
+                length = 1
+                
+                while j + 1 < n and nums[j+1] <= threshold and nums[j] % 2 != nums[j+1] % 2:
+                    j += 1
+                    length += 1
+                
+                max_len = max(max_len, length)
+                i = j + 1   
+            else:
+                i += 1
+        
+        return max_len
+    
+if __name__== "__main__":
+    a = Solution()
+    nums1 = [3,2,5,4]
+    threshold1 = 5
+    print(a.longestAlternatingSubarray(nums1, threshold1))  # 3
+        
+    nums2 = [1,2]
+    threshold2 = 2
+    print(a.longestAlternatingSubarray(nums2, threshold2))  # 1
+        
+    nums3 = [2,3,4,5]
+    threshold3 = 4
+    print(a.longestAlternatingSubarray(nums3, threshold3))  # 3
+
+## Time Complexity: O(n) where n is the length of the input array. We traverse the array once.
+## Space Complexity: O(1) since we are using only a constant amount of extra space to store the maximum length of the subarray and the current length of the alternating subarray.
