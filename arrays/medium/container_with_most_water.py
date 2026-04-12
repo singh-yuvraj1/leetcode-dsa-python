@@ -23,24 +23,53 @@
 # 0 <= height[i] <= 104
 
 #---------------------------------Brute Force Solution-------------------------------
+# class Solution(object):
+#     def maxArea(self, height):
+#         max_area = 0
+#         n = len(height)
+        
+#         for i in range(n):
+#             for j in range(i+1, n):
+#                 area = min(height[i], height[j]) * (j - i)
+#                 max_area = max(max_area, area)
+        
+#         return max_area
+# if __name__== "__main__":     
+#     a = Solution()
+#     height1 = [1,8,6,2,5,4,8,3,7]
+#     print(a.maxArea(height1))  # Output: 49
+
+#     height2 = [1,1]
+#     print(a.maxArea(height2))  # Output: 1
+
+# time complexity: O(n^2) - We have two nested loops, each iterating through the height array.
+# space complexity: O(1) - We are using a constant amount of extra space to store the max_area variable.
+
+
+
+#---------------------------------Two Pointer Solution-------------------------------
 class Solution(object):
     def maxArea(self, height):
         max_area = 0
-        n = len(height)
+        left, right = 0, len(height) - 1
         
-        for i in range(n):
-            for j in range(i+1, n):
-                area = min(height[i], height[j]) * (j - i)
-                max_area = max(max_area, area)
+        while left < right:
+            area = min(height[left], height[right]) * (right - left)
+            max_area = max(max_area, area)
+            
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
         
-        return max_area
-if __name__== "__main__":     
+        return max_area   
+if __name__== "__main__":
     a = Solution()
     height1 = [1,8,6,2,5,4,8,3,7]
     print(a.maxArea(height1))  # Output: 49
 
     height2 = [1,1]
-    print(a.maxArea(height2))  # Output: 1
+    print(a.maxArea(height2))  # Output: 1  
 
-# time complexity: O(n^2) - We have two nested loops, each iterating through the height array.
-# space complexity: O(1) - We are using a constant amount of extra space to store the max_area variable.
+# time complexity: O(n) - We traverse the height array at most once with two pointers.
+# space complexity: O(1) - We are using a constant amount of extra space to store the max_area variable and the two pointers.
