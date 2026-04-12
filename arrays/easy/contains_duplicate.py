@@ -26,7 +26,7 @@
 # -109 <= nums[i] <= 109
 
 
-#code
+# Solution 1: Brute Force Approach
 
 class Solution:
     def contains_duplicate(self,nums):
@@ -37,7 +37,14 @@ class Solution:
             else:
                 freq[num] = 1
         return False
- #time complexity ---->>>>O(n)
+
+output1 = Solution()
+print(output1.contains_duplicate([1,2,3,1]))  # True        
+print(output1.contains_duplicate([1,2,3,4]))  # False
+    
+    
+#time complexity ---->>>>O(n)
+#space complexity ---->>>>O(n) - In the worst case, if all elements in the array are distinct, we will store all n elements in the dictionary.
 
 
 #  Optimized Way
@@ -45,12 +52,16 @@ class SolutionOptimized:
     def contains_duplicate(self,nums):
         return len(nums) != len(set(nums))
     
- #time complexity ---->>>>O(n)
+
 
 
 if __name__== "__main__":
     s1 = Solution()
-    print(s1.contains_duplicate([1,2,3,1]))
+    print(s1.contains_duplicate([1,2,3,1]))   #output: True
 
     s2=SolutionOptimized()
-    print(s2.contains_duplicate([1,2,3,4]))
+    print(s2.contains_duplicate([1,2,3,4]))    #output: False
+
+
+ #time complexity ---->>>>O(n)
+ #space complexity ---->>>>O(n) - In the worst case, if all elements in the array are distinct, we will store all n elements in the set.

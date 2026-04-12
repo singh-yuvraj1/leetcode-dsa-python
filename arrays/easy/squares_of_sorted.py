@@ -16,8 +16,29 @@
 # -104 <= nums[i] <= 104
 # nums is sorted in non-decreasing order.
 
-#------------------------------Solution-------------------------------
-class Solution(object):
+#------------------------------Solution  brute force -------------------------------
+
+class Solution1(object):
+    def sortedSquares(self, nums):
+        return sorted(x ** 2 for x in nums)
+
+if __name__== "__main__":
+    a = Solution1()
+    nums1 = [-4,-1,0,3,10]
+    print(a.sortedSquares(nums1))  # [0,1,9,16,100]
+    
+    b = Solution1()                     
+    nums2 = [-7,-3,2,3,11]
+    print(b.sortedSquares(nums2))  # [4,9,9,49,121]
+    
+#time complexity: O(n log n) - Sorting the array takes O(n log n) time, and generating the squared values takes O(n) time.
+#space complexity: O(n) - We are creating a new array to store the squared values, which takes O(n) space. The sorting operation may also require O(n) space in the worst case, depending on the sorting algorithm used.
+
+
+
+#---------------------------two pointer approach-------------------------------
+
+class Solution2(object):
     def sortedSquares(self, nums):
         n = len(nums)
         result = [0] * n
@@ -32,17 +53,14 @@ class Solution(object):
                 right -= 1
             pos -= 1
         return result
-    
-#------------------------------Another Way to solve------------------------------- but not good bcoz it takes O(n log n) time due to the sorting step, while the two-pointer approach takes O(n) time. The space complexity is O(n) for both approaches since we are creating a new array to store the squared values.
-class Solution1(object):
-    def sortedSquares(self, nums):
-        return sorted(x ** 2 for x in nums)
-
 if __name__== "__main__":
-    a = Solution()
+    a = Solution2()
     nums1 = [-4,-1,0,3,10]
     print(a.sortedSquares(nums1))  # [0,1,9,16,100]
     
-    b = Solution1()                     
+    b = Solution2()                     
     nums2 = [-7,-3,2,3,11]
     print(b.sortedSquares(nums2))  # [4,9,9,49,121]
+
+# time complexity: O(n) - We traverse the nums array once with two pointers.
+# space complexity: O(n) - We are using an additional array result to store the squared values.

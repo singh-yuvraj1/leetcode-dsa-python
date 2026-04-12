@@ -26,18 +26,22 @@
 # Only one valid answer exists.
 
 #Solution
-# class Solution(object):
-#     def twoSum(self, nums, target):
-#         d = {}
-#         for i in range(len(nums)):
-#             diff = target - nums[i]
+class Solution(object):
+    def twoSum(self, nums, target):
+        d = {}
+        for i in range(len(nums)):
+            diff = target - nums[i]
             
-#             if diff in d:
-#                 return [d[diff], i]
+            if diff in d:
+                return [d[diff], i]
             
-#             d[nums[i]] = i
+            d[nums[i]] = i
 
-# if __name__== "__main__":
+if __name__== "__main__":
     
-#     a = Solution()
-#     print(a.twoSum([2,7,11,15], 9))
+    a = Solution()
+    print(a.twoSum([2,7,11,15], 9))
+    print(a.twoSum([3,2,4], 6))
+
+#time complexity: O(n) - We traverse the nums array once, and each lookup in the dictionary is O(1).    
+#space complexity: O(n) - In the worst case, we may store all n elements in the dictionary.
