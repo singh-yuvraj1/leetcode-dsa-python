@@ -42,3 +42,53 @@ if __name__== "__main__":
 ## Space Complexity: O(1) since we are not using any additional data structures that grow with the input size.
 
 
+#----------------------------------Optimal Solution----------------------------------
+class Solution1(object):
+    def maxProfit(self, prices):
+        min_price = float('inf')
+        max_profit = 0
+        
+        for price in prices:
+            if price < min_price:
+                min_price = price
+            elif price - min_price > max_profit:
+                max_profit = price - min_price
+        
+        return max_profit
+if __name__== "__main__":
+    a = Solution1()
+    prices1 = [7,1,5,3,6,4]
+    print(a.maxProfit(prices1))  # 5
+
+    prices2 = [7,6,4,3,1]
+    print(a.maxProfit(prices2))  # 0    
+## Time Complexity: O(n) where n is the length of the input array. We have a single loop that iterates through the array once to calculate the minimum price and maximum profit.
+## Space Complexity: O(1) since we are using only a constant amount of extra space to store the minimum price and maximum profit.
+
+
+
+
+#solution optimal with two pointers
+class Solution2(object):
+    def maxProfit(self, prices):
+        left, right = 0, 1
+        max_profit = 0
+        
+        while right < len(prices):
+            if prices[left] < prices[right]:
+                profit = prices[right] - prices[left]
+                max_profit = max(max_profit, profit)
+            else:
+                left = right
+            right += 1
+        
+        return max_profit
+if __name__== "__main__":
+    a = Solution2()
+    prices1 = [7,1,5,3,6,4]
+    print(a.maxProfit(prices1))  # 5
+
+    prices2 = [7,6,4,3,1]
+    print(a.maxProfit(prices2))  # 0
+## Time Complexity: O(n) where n is the length of the input array. We have a single loop that iterates through the array once to calculate the maximum profit using two pointers.
+## Space Complexity: O(1) since we are using only a constant amount of extra space to store the pointers and maximum profit.
