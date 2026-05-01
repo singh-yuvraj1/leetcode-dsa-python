@@ -57,4 +57,31 @@ if __name__== "__main__":
 ## Space Complexity: O(1) since we are using a constant amount of extra space to store the counts of 'L', 'R', and '_'.
 
 
+#----------------------------------Optimal Solution ----------------------------------
+
+class Solution1(object):
+    def furthestDistanceFromOrigin(self, moves):
+        position = 0
+        max_distance = 0
+
+        for move in moves:
+            if move == 'L':
+                position -= 1
+            elif move == 'R':
+                position += 1
+            # '_' can be treated as either 'L' or 'R', so we consider the maximum possible distance
+
+        return abs(position)
+if __name__== "__main__":
+    a = Solution1()
+    moves1 = "L_RL__R"
+    print(a.furthestDistanceFromOrigin(moves1))  # 3
+
+    moves2 = "_R__LL_"
+    print(a.furthestDistanceFromOrigin(moves2))  # 5
+
+    moves3 = "_______"
+    print(a.furthestDistanceFromOrigin(moves3))  # 7
+## Time Complexity: O(n) where n is the length of the input string moves. We need to iterate through the string once to calculate the position and maximum distance.
+## Space Complexity: O(1) since we are using a constant amount of extra space to store the position and maximum distance.
 
