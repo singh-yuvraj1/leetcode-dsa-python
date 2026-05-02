@@ -63,3 +63,35 @@ if __name__ == "__main__":
 
 
 
+#------------------------------------Optimal Solution [Using Directional Traversal]------------------------------------
+def spiralOrder(matrix):
+    res = []
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # right, down, left, up
+    direction_index = 0
+    row, col = 0, 0
+
+    for _ in range(len(matrix) * len(matrix[0])):
+        res.append(matrix[row][col])
+        matrix[row][col] = None  # Mark as visited
+
+        next_row = row + directions[direction_index][0]
+        next_col = col + directions[direction_index][1]
+
+        if (0 <= next_row < len(matrix) and
+            0 <= next_col < len(matrix[0]) and
+            matrix[next_row][next_col] is not None):
+            row, col = next_row, next_col
+        else:
+            direction_index = (direction_index + 1) % 4
+            row += directions[direction_index][0]
+            col += directions[direction_index][1]
+
+    return res
+if __name__ == "__main__":
+    matrix = [[1,2,3],[4,5,6],[7,8,9]]
+    print(spiralOrder(matrix))  # Output: [1,2,3,6,9,8,7,4,5]
+
+    matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+    print(spiralOrder(matrix))  # Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+# Time Complexity: O(m*n) where m is the number of rows and n is the number of columns in the matrix.
+# Space Complexity: O(1) if we don't consider the output list, otherwise O(m*n) for the output list.
