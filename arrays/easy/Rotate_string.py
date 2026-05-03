@@ -41,3 +41,24 @@ if __name__== "__main__":
     print(a.rotateString(s2, goal2))  # False
 ## Time Complexity: O(n^2) where n is the length of the input string. We have a loop that iterates n times, and for each iteration, we perform a string rotation which takes O(n) time.
 ## Space Complexity: O(1) since we are not using any additional data structures that grow with the input size. We are only using a constant amount of space for the loop variable and the return value.
+
+
+
+#solution 2: Concatenation Solution ---------optimized solution
+class Solution1(object):
+    def rotateString(self, s, goal):
+        if len(s) != len(goal):
+            return False
+        
+        return goal in (s + s)  # Concatenate s with itself and check if goal is a substring
+if __name__== "__main__":
+    a = Solution1()
+    s1, goal1 = "abcde", "cdeab"
+    print(a.rotateString(s1, goal1))  # True
+
+    s2, goal2 = "abcde", "abced"
+    print(a.rotateString(s2, goal2))  # False
+## Time Complexity: O(n) where n is the length of the input string. We concatenate the string s with itself, which takes O(n) time, and then we check if goal is a substring of the concatenated string, which also takes O(n) time.
+## Space Complexity: O(n) since we are creating a new string that is the concatenation
+
+
