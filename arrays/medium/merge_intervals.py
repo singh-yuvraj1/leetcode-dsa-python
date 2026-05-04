@@ -65,3 +65,39 @@ if __name__== "__main__":
 
 ## Time Complexity: O(n log n) where n is the number of intervals. This is due to the sorting step, which takes O(n log n) time. The merging step takes O(n) time, resulting in an overall time complexity of O(n log n).
 ## Space Complexity: O(n) in the worst case, if all intervals are non-overlapping, we will have to store all intervals in the merged list. In the best case, if all intervals overlap, we will only store one interval in the merged list, resulting in O(1) space complexity. Therefore, the overall space complexity is O(n) in the worst case.
+
+
+#solution 2: Optimized Solution
+class Solution1(object):
+    def merge(self, intervals):
+        if not intervals:
+            return []
+        
+        # Sort the intervals based on the start time
+        intervals.sort(key=lambda x: x[0])
+        
+        merged = []
+        
+        for interval in intervals:
+            # If the merged list is empty or the current interval does not overlap with the last merged interval, add it to the merged list
+            if not merged or merged[-1][1] < interval[0]:
+                merged.append(interval)
+            else:
+                # Overlapping intervals, merge them by updating the end time of the last merged interval
+                merged[-1][1] = max(merged[-1][1], interval[1])
+        
+        return merged
+if __name__== "__main__":
+    a = Solution1()
+    intervals1 = [[1,3],[2,6],[8,10],[15,18]]
+    print(a.merge(intervals1))  # [[1,6],[8,10],[15,18]]
+
+    intervals2 = [[1,4],[4,5]]
+    print(a.merge(intervals2))  # [[1,5]]
+
+    intervals3 = [[4,7],[1,4]]
+    print(a.merge(intervals3))  # [[1,7]]
+
+## Time Complexity: O(n log n) where n is the number of intervals. This is due to the sorting step, which takes O(n log n) time. The merging step takes O(n) time, resulting in an overall time complexity of O(n log n).
+## Space Complexity: O(n) in the worst case, if all intervals are non-overlapping, we will have to store all intervals in the merged list. In the best case, if all intervals overlap, we will only store one interval in the merged list, resulting in O(1) space complexity. Therefore, the overall space complexity is O(n) in the worst case.
+
