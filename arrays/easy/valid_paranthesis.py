@@ -41,6 +41,36 @@
 #solution 1: Brute Force Solution
 class Solution(object):
     def isValid(self, s):
+      
+        while "()" in s or "{}" in s or "[]" in s:
+            s = s.replace("()", "")
+            s = s.replace("{}", "")
+            s = s.replace("[]", "")
+        
+        return s == ""
+if __name__== "__main__":
+    a = Solution()
+    s1 = "()"
+    print(a.isValid(s1))  # True
+
+    s2 = "()[]{}"
+    print(a.isValid(s2))  # True
+
+    s3 = "(]"
+    print(a.isValid(s3))  # False
+
+    s4 = "([])"
+    print(a.isValid(s4))  # True
+
+    s5 = "([)]"
+    print(a.isValid(s5))  # False
+#time complexity: O(n^2), where n is the length of the string s. In the worst case, we may have to check for all pairs of parentheses in the string, leading to O(n^2) time complexity.
+#space complexity: O(n), in the worst case, if all characters in the string are opening brackets, we will have to store all of them in the stack. In the best case, if all characters are closing brackets, we will not store any character in the stack, resulting in O(1) space complexity. Therefore, the overall space complexity is O(n) in the worst case.
+
+
+#Solution 2: Optimized Solution
+class Solution(object):
+    def isValid(self, s):
         stack = []
         mapping = {')': '(', '}': '{', ']': '['}
         
@@ -70,5 +100,5 @@ if __name__== "__main__":
     s5 = "([)]"
     print(a.isValid(s5))  # False
 #time complexity: O(n), where n is the length of the string s. We traverse the string once.
-#space complexity: O(n), in the worst case, if all characters in the string are
+#space complexity: O(n), in the worst case, if all characters in the string are opening brackets, we will have to store all of them in the stack. In the best case, if all characters are closing brackets, we will not store any character in the stack, resulting in O(1) space complexity. Therefore, the overall space complexity is O(n) in the worst case.
 
