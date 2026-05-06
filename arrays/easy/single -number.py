@@ -41,3 +41,24 @@ if __name__== "__main__":
     print(a.singleNumber(nums3))  # 1
 #time complexity: O(n^2), where n is the length of the input array nums. In the worst case, we may have to check each element in the array against every other element to count its occurrences, leading to O(n
 #space complexity: O(1), as we are using only a constant amount of extra space to store the count of occurrences.
+
+
+#solution 2: Using XOR operator
+class Solution(object):
+    def singleNumber(self, nums):
+        result = 0
+        for num in nums:
+            result ^= num
+        return result
+if __name__== "__main__":
+    a = Solution()
+    nums1 = [2,2,1]
+    print(a.singleNumber(nums1))  # 1
+
+    nums2 = [4,1,2,1,2]
+    print(a.singleNumber(nums2))  # 4
+
+    nums3 = [1]
+    print(a.singleNumber(nums3))  # 1
+#time complexity: O(n), where n is the length of the input array nums. We need to iterate through the array once to compute the XOR of all elements.
+#space complexity: O(1), as we are using only a constant amount of extra space to store the result of the XOR operation.
