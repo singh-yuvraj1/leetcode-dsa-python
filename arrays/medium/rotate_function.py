@@ -56,3 +56,27 @@ if __name__== "__main__":
 #space complexity: O(1), as we are using only a constant amount of extra space to store the maximum value and the current value during the calculations.
 
 
+#using optimized approach
+class Solution(object):
+    def maxRotateFunction(self, nums):
+        n = len(nums)
+        total_sum = sum(nums)
+        F_0 = sum(i * num for i, num in enumerate(nums))
+        
+        max_value = F_0
+        
+        for k in range(1, n):
+            F_k = F_0 + total_sum - n * nums[n - k]
+            max_value = max(max_value, F_k)
+            F_0 = F_k
+        
+        return max_value
+if __name__== "__main__":
+    a = Solution()
+    nums1 = [4,3,2,6]
+    print(a.maxRotateFunction(nums1))  # 26
+
+    nums2 = [100]
+    print(a.maxRotateFunction(nums2))  # 0
+#time complexity: O(n), where n is the length of the input array nums. We compute the total sum and F(0) in O(n) time, and then we iterate through the array once to compute F(k) for k from 1 to n-1, which also takes O(n) time.
+#space complexity: O(1), as we are using only a constant amount of extra space to store the total sum, F(0), and the maximum value during the calculations.
