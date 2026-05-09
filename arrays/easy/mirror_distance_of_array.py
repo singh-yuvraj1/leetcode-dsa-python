@@ -55,3 +55,29 @@ if __name__== "__main__":
     print(a.mirrorDistance(n3))  # 0
 ## Time Complexity: O(d) where d is the number of digits in the input integer n. The reverse function takes O(d) time to reverse the digits of n.
 ## Space Complexity: O(d) due to the space used to store the string representation of n in the reverse function. The space used for the reversed string is proportional to the number of digits in n.
+
+
+# Solution 2: Optimized Solution without converting to string
+class Solution1(object):
+    def mirrorDistance(self, n):
+        def reverse(num):
+            rev = 0
+            while num > 0:
+                rev = rev * 10 + num % 10
+                num //= 10
+            return rev
+        
+        return abs(n - reverse(n))
+if __name__== "__main__":
+    a = Solution1()
+    n1 = 25
+    print(a.mirrorDistance(n1))  # 27
+
+    n2 = 10
+    print(a.mirrorDistance(n2))  # 9
+
+    n3 = 7
+    print(a.mirrorDistance(n3))  # 0
+## Time Complexity: O(d) where d is the number of digits in the input integer n. The reverse function takes O(d) time to reverse the digits of n.
+## Space Complexity: O(1) since we are using only a constant amount of space to store the reversed number and the loop variable. We are not using any additional data structures that grow with the input size.
+
