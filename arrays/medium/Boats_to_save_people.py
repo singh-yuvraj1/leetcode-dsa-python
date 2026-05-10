@@ -59,3 +59,38 @@ if __name__== "__main__":
 ## Space Complexity: O(1) if we ignore the space used for sorting. If the sorting algorithm used is not in-place, then the space complexity would be O(n) due to the additional space used for sorting.
 
 
+#--------------------optimized solution--------------------
+class Solution:
+    def numRescueBoats(self, people, limit):
+        people.sort()
+
+        left = 0
+        right = len(people) - 1
+        boats = 0
+
+        while left <= right:
+
+            # If lightest and heaviest can go together
+            if people[left] + people[right] <= limit:
+                left += 1
+
+            # Heaviest person always goes
+            right -= 1
+            boats += 1
+
+        return boats
+if __name__== "__main__":
+    a = Solution()
+    people1 = [1,2]
+    limit1 = 3
+    print(a.numRescueBoats(people1, limit1))  # 1
+
+    people2 = [3,2,2,1]
+    limit2 = 3
+    print(a.numRescueBoats(people2, limit2))  # 3
+
+    people3 = [3,5,3,4]
+    limit3 = 5
+    print(a.numRescueBoats(people3, limit3))  # 4
+## Time Complexity: O(n log n) due to the sorting step. The two-pointer traversal takes O(n) time.
+## Space Complexity: O(1) if we ignore the space used for sorting. If the sorting algorithm used is not in-place, then the space complexity would be O(n) due to the additional space used for sorting.
