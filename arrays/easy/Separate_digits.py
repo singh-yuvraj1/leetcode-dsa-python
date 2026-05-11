@@ -48,3 +48,25 @@ if __name__== "__main__":
     print(a.separateDigits(nums2))  # [7,1,3,9]
 ## Time Complexity: O(n * m) where n is the number of integers in the input array and m is the average number of digits in each integer. This is because we iterate through each integer and then through each digit of that integer.
 ## Space Complexity: O(n * m) in the worst case, where n is the number of integers in the input array and m is the average number of digits in each integer. This is because we are creating a new list to store the separated digits, which could potentially contain all the digits of all the integers in the input array.
+
+#--------------------optimized solution--------------------
+class Solution:
+    def separateDigits(self, nums):
+        answer = []
+        
+        for num in nums:
+            while num > 0:
+                digit = num % 10
+                answer.append(digit)
+                num //= 10
+        
+        return answer[::-1]
+if __name__== "__main__":
+    a = Solution()
+    nums1 = [13,25,83,77]
+    print(a.separateDigits(nums1))  # [1,3,2,5,8,3,7,7]
+
+    nums2 = [7,1,3,9]
+    print(a.separateDigits(nums2))  # [7,1,3,9]
+## Time Complexity: O(n * m) where n is the number of integers in the input array and m is the average number of digits in each integer. This is because we iterate through each integer and then through each digit of that integer.
+## Space Complexity: O(n * m) in the worst case, where n is the number of integers in the input array and m is the average number of digits in each integer. This is because we are creating a new list to store the separated digits, which could potentially contain all the digits of all the integers in the input array.
