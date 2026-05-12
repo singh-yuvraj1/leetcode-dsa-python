@@ -65,3 +65,43 @@ if __name__== "__main__":
 ## Time Complexity: O(n * m) where n is the input integer and m is the average number of digits in the integers from 1 to n. This is because we iterate through each integer from 1 to n and for each integer, we check if it is a good number by iterating through its digits.
 ## Space Complexity: O(m) where m is the average number of digits in the integers from 1 to n. This is because we create a string representation of each integer to check if it is a good number, and the space used for this string is proportional to the number of digits in the integer.
 
+
+#--------------------optimized solution--------------------
+class Solution:
+    def rotatedDigits(self, n):
+        count = 0
+        
+        for num in range(1, n + 1):
+            if self.is_good(num):
+                count += 1
+        
+        return count
+    
+    def is_good(self, num):
+        valid_digits = {'0', '1', '8', '2', '5', '6', '9'}
+        rotated_digits = {'2': '5', '5': '2', '6': '9', '9': '6'}
+        
+        has_rotatable_digit = False
+        
+        while num > 0:
+            digit = num % 10
+            if str(digit) not in valid_digits:
+                return False
+            if str(digit) in rotated_digits:
+                has_rotatable_digit = True
+            num //= 10
+        
+        return has_rotatable_digit
+if __name__== "__main__":
+    a = Solution()
+    n1 = 10
+    print(a.rotatedDigits(n1))  # 4
+
+    n2 = 1
+    print(a.rotatedDigits(n2))  # 0
+
+    n3 = 2
+    print(a.rotatedDigits(n3))  # 1
+## Time Complexity: O(n * m) where n is the input integer and m is the average number of digits in the integers from 1 to n. This is because we iterate through each integer from 1 to n and for each integer, we check if it is a good number by iterating through its digits.
+## Space Complexity: O(1) because we are using a constant amount of space to store
+# the valid digits and rotated digits, and we are not using any additional space that grows with the input size.
