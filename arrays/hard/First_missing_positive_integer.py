@@ -67,3 +67,31 @@ if __name__== "__main__":
 ## Time Complexity: O(n) where n is the length of the input array. We create a set from the input array, which takes O(n) time, and then we have a loop that iterates from 1 to n + 1, which also takes O(n) time. Therefore, the overall time complexity is O(n).
 ## Space Complexity: O(n) where n is  the length of the input array. We create a set to store the unique elements from the input array, which can take up to O(n) space in the worst case if all elements are unique.
  
+
+ # optimal solution: In-place Hashing Solution
+class Solution2(object):
+    def firstMissingPositive(self, nums):
+        n = len(nums)
+        
+        for i in range(n):
+            while 1 <= nums[i] <= n and nums[nums[i] - 1] != nums[i]:
+                nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
+        
+        for i in range(n):
+            if nums[i] != i + 1:
+                return i + 1
+        
+        return n + 1
+if __name__== "__main__":
+    a = Solution2()
+    nums1 = [1,2,0]
+    print(a.firstMissingPositive(nums1))  # 3
+
+    nums2 = [3,4,-1,1]
+    print(a.firstMissingPositive(nums2))  # 2
+
+    nums3 = [7,8,9,11,12]
+    print(a.firstMissingPositive(nums3))  # 1
+## Time Complexity: O(n) where n is the length of the input array. We have two loops that iterate through the array, but each element is moved at most once, resulting in O(n) time complexity.
+## Space Complexity: O(1) since we are modifying the input array in place and not using any additional data structures that grow with the input size. We are only using a constant amount of space for the loop variables and the return value.
+
