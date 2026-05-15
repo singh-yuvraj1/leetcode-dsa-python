@@ -52,3 +52,30 @@ if __name__== "__main__":
     print(a.findMin(nums3)) # Output: 11
 #time complexity: O(n)
 #space complexity: O(1)
+
+
+#solution 2: Binary Search Solution
+class Solution(object):
+    def findMin(self, nums):
+        left, right = 0, len(nums) - 1
+        
+        while left < right:
+            mid = left + (right - left) // 2
+            
+            if nums[mid] > nums[right]:
+                left = mid + 1
+            else:
+                right = mid
+        
+        return nums[left]
+if __name__== "__main__":
+    a = Solution()
+    nums1 = [3,4,5,1,2]
+    print(a.findMin(nums1)) # Output: 1
+    nums2 = [4,5,6,7,0,1,2]
+    print(a.findMin(nums2)) # Output: 0
+    nums3 = [11,13,15,17]
+    print(a.findMin(nums3)) # Output: 11
+#time complexity: O(log n) because we are halving the search space in each iteration
+#space complexity: O(1) because we are using only a constant amount of extra space for the pointers and variables.
+
