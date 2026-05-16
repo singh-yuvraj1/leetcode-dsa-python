@@ -44,3 +44,27 @@ if __name__ == "__main__":
 #space complexity: O(1) because we are using only a constant amount of extra space to store the minimum value.
 
 
+#Optimal Solution---
+class Solution1:
+    def findMin(self, nums):
+        left, right = 0, len(nums) - 1
+
+        while left < right:
+            mid = left + (right - left) // 2
+
+            if nums[mid] > nums[right]:
+                left = mid + 1
+            elif nums[mid] < nums[right]:
+                right = mid
+            else:
+                right -= 1
+
+        return nums[left]
+if __name__ == "__main__":
+    nums = [2,2,2,0,1]
+    print(Solution1().findMin(nums))
+#output: 0
+#time complexity: O(log n) in the average and best cases, but O(n)
+# in the worst case when there are many duplicates, because we may have to check each element.
+#space complexity: O(1) because we are using only a constant amount of extra space to store the pointers and the minimum value.
+
