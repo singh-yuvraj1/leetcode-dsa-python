@@ -57,3 +57,30 @@ if __name__ == "__main__":
 
 
  
+#optimal Solution---
+class Solution1:
+    def canReach(self, arr, start):
+        visited = set()
+        queue = [start]
+
+        while queue:
+            index = queue.pop(0)
+
+            if index < 0 or index >= len(arr) or index in visited:
+                continue
+
+            if arr[index] == 0:
+                return True
+
+            visited.add(index)
+            queue.append(index + arr[index])
+            queue.append(index - arr[index])
+
+        return False
+if __name__ == "__main__":
+    arr = [4,2,3,0,3,1,2]
+    start = 5
+    print(Solution1().canReach(arr, start))
+#output: True
+#time complexity: O(n) because in the worst case, we may visit each index of the array once.
+#space complexity: O(n) because in the worst case, we may have to store all indices in the visited set and the queue.
