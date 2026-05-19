@@ -40,3 +40,19 @@ if __name__ == "__main__":
 
 # Time Complexity: O(n + m), where n and m are the lengths of nums1 and nums2 respectively.
 # Space Complexity: O(1) since we are using only a constant amount of extra space
+
+
+#optimized solution using set---
+class Solution:
+    def getCommon(self, nums1, nums2):
+        set_nums1 = set(nums1)
+        for num in nums2:
+            if num in set_nums1:
+                return num
+        return -1
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.getCommon([1,2,3], [2,4]))  # Output: 2
+    print(solution.getCommon([1,2,3,6], [2,3,4,5]))  # Output: 2
+# Time Complexity: O(n + m), where n and m are the lengths of nums1 and nums2 respectively.
+# Space Complexity: O(n) since we are storing all elements of nums1 in a set
