@@ -66,3 +66,35 @@ if __name__ == "__main__":
 # Time Complexity: O(n * m * k), where n and m are the lengths of arr1 and arr2 respectively, and k is the average number of digits in the integers.
 # Space Complexity: O(1) since we are using only a constant amount of extra space
 
+
+
+#optimized solution using sorting---
+class Solution:
+    def longestCommonPrefix(self, arr1, arr2):
+        arr1.sort()
+        arr2.sort()
+        max_length = 0
+        for num1 in arr1:
+            for num2 in arr2:
+                common_prefix_length = self.common_prefix_length(num1, num2)
+                max_length = max(max_length, common_prefix_length)
+                if common_prefix_length == 0:
+                    break
+        return max_length
+
+    def common_prefix_length(self, num1, num2):
+        str_num1 = str(num1)
+        str_num2 = str(num2)
+        length = 0
+        for digit1, digit2 in zip(str_num1, str_num2):
+            if digit1 == digit2:
+                length += 1
+            else:
+                break
+        return length
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.longestCommonPrefix([1,10,100], [1000]))  # Output: 3
+    print(solution.longestCommonPrefix([1,2,3], [4,4,4]))  # Output: 0
+# Time Complexity: O(n log n + m log m + n * m * k), where n and m are the lengths of arr1 and arr2 respectively, and k is the average number of digits in the integers.
+# Space Complexity: O(1) since we are using only a constant amount of extra space
