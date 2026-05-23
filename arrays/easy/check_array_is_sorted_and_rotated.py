@@ -47,3 +47,23 @@ if __name__ == "__main__":
 # Time Complexity: O(n) since we may have to check each element in the worst case.
 # Space Complexity: O(1) since we are using only a constant amount of extra space.
 
+
+#optimized solution--- using a single pass---
+class Solution1:
+    def check(self, nums):
+        count = 0
+        n = len(nums)
+
+        for i in range(n):
+            if nums[i] > nums[(i + 1) % n]:
+                count += 1
+
+        return count <= 1
+if __name__ == "__main__":
+    solution = Solution1()
+    print(solution.check([3,4,5,1,2]))  # Output: true
+    print(solution.check([2,1,3,4]))  # Output: false
+    print(solution.check([1,2,3]))  # Output: true
+# Time Complexity: O(n) since we may have to check each element in the worst case.
+# Space Complexity: O(1) since we are using only a constant amount of extra space.
+
