@@ -67,3 +67,47 @@ if __name__ == "__main__":
 # Time Complexity: O(n^2) in the worst case, where n is the length of the array. This happens when we have to explore all possible jumps for each index.
 # Space Complexity: O(n) due to the memoization array and the recursion stack in the
 
+
+# optimized solution--- using dynamic programming---
+class Solution:
+    def maxJumps(self, arr, d):
+        n = len(arr)
+        dp = [-1] * n
+
+        def dfs(i):
+            # already calculated
+            if dp[i] != -1:
+                return dp[i]
+
+            ans = 1   # count current index
+
+            # move right
+            for j in range(i + 1, min(n, i + d + 1)):
+                if arr[j] >= arr[i]:
+                    break
+
+                ans = max(ans, 1 + dfs(j))
+
+            # move left
+            for j in range(i - 1, max(-1, i - d - 1), -1):
+                if arr[j] >= arr[i]:
+                    break
+
+                ans = max(ans, 1 + dfs(j))
+
+            dp[i] = ans
+            return ans
+
+        result = 1
+
+        for i in range(n):
+            result = max(result, dfs(i))
+
+        return result
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.maxJumps([6,4,14,6,8,13,9,7,10,6,12], 2))  # Output: 4
+    print(solution.maxJumps([3,3,3,3,3], 3))  # Output: 1
+    print(solution.maxJumps([7,6,5,4,3,2,1], 1))  # Output: 7
+# Time Complexity: O(n^2) in the worst case, where n is the length of the array. This happens when we have to explore all possible jumps for each index.
+# Space Complexity: O(n) due to the dp array. because we are storing the maximum jumps for each index.
