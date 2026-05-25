@@ -65,3 +65,50 @@ if __name__ == "__main__":
 #space complexity: O(n) in the worst case, where n is the length of the string s. This is because in the worst case, we may have to store all indices in the call stack due to recursion.
 
 
+#optimal solution--- using bfs and sliding window technique---
+class Solution(object):
+    def canReach(self, s, minJump, maxJump):
+        """
+        :type s: str
+        :type minJump: int
+        :type maxJump: int
+        :rtype: bool
+        """
+
+        n = len(s)
+
+        queue = [0]
+        front = 0
+
+        # farthest index already checked
+        far = 0
+
+        while front < len(queue):
+
+            i = queue[front]
+            front += 1
+
+            start = max(i + minJump, far + 1)
+            end = min(i + maxJump, n - 1)
+
+            for j in range(start, end + 1):
+
+                if s[j] == '0':
+
+                    if j == n - 1:
+                        return True
+
+                    queue.append(j)
+
+            far = end
+
+        return n == 1
+if __name__ == "__main__":
+    s = "011010"
+    minJump = 2
+    maxJump = 3
+    print(Solution().canReach(s, minJump, maxJump))  # Output: true
+#time complexity: O(n) in the worst case, where n is the length of the string s. This is because we may have to explore all indices in the string.
+#space complexity: O(n) in the worst case, where n is the length of the string s. This is because in the worst case, we may have to store all indices in the queue.
+
+
