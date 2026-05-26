@@ -67,3 +67,35 @@ if __name__ == "__main__":
 #space complexity: O(1) since we are using a constant amount of extra space to store the count and the boolean variables.
 
 
+#solution 2--- Using Sets
+class Solution(object):
+    def numberOfSpecialChars(self, word):
+        """
+        :type word: str
+        :rtype: int
+        """
+
+        lowerSet = set()
+        upperSet = set()
+
+        for c in word:
+
+            if c.islower():
+                lowerSet.add(c)
+
+            else:
+                upperSet.add(c)
+
+        count = 0
+
+        for ch in lowerSet:
+
+            if ch.upper() in upperSet:
+                count += 1
+
+        return count
+if __name__ == "__main__":
+    word = "aaAbcBC"
+    print(Solution().numberOfSpecialChars(word))
+#time complexity: O(n) where n is the length of the input string word.
+#space complexity: O(n) in the worst case, where n is the length of the input string word. This is because in the worst case, all characters in word could be unique, leading to a lowerSet and upperSet that each contain n/2 characters.
