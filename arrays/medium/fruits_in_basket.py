@@ -59,4 +59,31 @@ if __name__ == "__main__":
 #space complexity: O(1) because the basket dictionary can hold at most 2 types of fruits, which is a constant amount of space.
 
 
+#optimized solution -- sliding window solution
+class Solution:
+    def totalFruit(self, fruits):
+        n = len(fruits)
+        ans = 0
+        left = 0
+        basket = {}
 
+        for right in range(n):
+            basket[fruits[right]] = basket.get(fruits[right], 0) + 1
+
+            while len(basket) > 2:
+                basket[fruits[left]] -= 1
+
+                if basket[fruits[left]] == 0:
+                    del basket[fruits[left]]
+
+                left += 1
+
+            ans = max(ans, right - left + 1)
+
+        return ans
+if __name__ == "__main__":
+    fruits = [1,2,1]
+    print(Solution().totalFruit(fruits))
+#output: 3
+#time complexity: O(n) because we have a single loop iterating through the fruits array
+#space complexity: O(1) because the basket dictionary can hold at most 2 types of fruits, which is a constant amount of space.
