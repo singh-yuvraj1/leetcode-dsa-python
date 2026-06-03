@@ -60,3 +60,32 @@ if __name__ == "__main__":
 
 
 
+#optimized solution -- using set to store the generated numbers
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        seen = set()
+
+        while n != 1 and n not in seen:
+            seen.add(n)
+
+            total = 0
+
+            while n > 0:
+                digit = n % 10
+                total += digit * digit
+                n //= 10
+
+            n = total
+
+        return n == 1
+if __name__ == "__main__":
+    n = 19
+    print(Solution().isHappy(n))
+    n=2
+    print(Solution().isHappy(n))
+#output: true, false
+#time complexity: O(k) because searching in set takes O(1)
+# k = number of generated numbers
+#space complexity: O(k) because we are storing the generated numbers in the seen set.
+
+    
