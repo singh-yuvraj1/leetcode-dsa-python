@@ -70,3 +70,43 @@ if __name__ == "__main__":
     print(a.decodeString(s3))  # Output: "abcabccdcdcdef"
 # time complexity: O(n) - We traverse the input string once, where n is the length of the string.
 # space complexity: O(m) - The space complexity is O(m), where m is the maximum depth of nested brackets in the input string. This is because we use a recursive helper function that can go as deep as the number of nested brackets. In the worst case, if there are many nested brackets, the space used by the call stack can grow accordingly.
+
+
+
+#optimized solution using stack
+
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stack = []
+        curr_num = 0
+        curr_str = ""
+
+        for ch in s:
+            if ch.isdigit():
+                curr_num = curr_num * 10 + int(ch)
+
+            elif ch == '[':
+                stack.append((curr_str, curr_num))
+                curr_str = ""
+                curr_num = 0
+
+            elif ch == ']':
+                prev_str, num = stack.pop()
+                curr_str = prev_str + num * curr_str
+
+            else:
+                curr_str += ch
+
+        return curr_str
+if __name__ == "__main__":
+    a = Solution()
+    s1 = "3[a]2[bc]"
+    print(a.decodeString(s1))  # Output: "aaabcbc"
+
+    s2 = "3[a2[c]]"
+    print(a.decodeString(s2))  # Output: "accaccacc"
+
+    s3 = "2[abc]3[cd]ef"
+    print(a.decodeString(s3))  # Output: "abcabccdcdcdef"
+# time complexity: O(n) - We traverse the input string once, where n is the length of the string.
+# space complexity: O(m) - The space complexity is O(m), where m is the maximum depth of nested brackets in the input string. This is because we use a stack to keep track of the previous strings and numbers, and in the worst case, if there are many nested brackets, the stack can grow accordingly.
