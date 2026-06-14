@@ -63,3 +63,33 @@ if __name__ == "__main__":
     print(stockSpanner.next(85))   # return 6
 #time complexity: O(n) for each next call in the worst case, where n is the number of prices seen so far. In the worst case, we may have to check all previous prices to calculate the span.
 #space complexity: O(n), where n is the number of prices seen so far. We store all the prices in a list, which requires O(n) space.
+
+
+#optimized solution using stack
+class StockSpanner(object):
+
+    def __init__(self):
+        # stack stores: (price, span)
+        self.stack = []
+
+    def next(self, price):
+        span = 1
+
+        # Merge smaller/equal prices
+        while self.stack and self.stack[-1][0] <= price:
+            span += self.stack.pop()[1]
+
+        self.stack.append((price, span))
+
+        return span
+if __name__ == "__main__":
+    stockSpanner = StockSpanner()
+    print(stockSpanner.next(100))  # return 1
+    print(stockSpanner.next(80))   # return 1
+    print(stockSpanner.next(60))   # return 1
+    print(stockSpanner.next(70))   # return 2
+    print(stockSpanner.next(60))   # return 1
+    print(stockSpanner.next(75))   # return 4
+    print(stockSpanner.next(85))   # return 6
+#time complexity: O(1) for each next call on average. Each price is pushed and popped from the stack at most once, leading to an amortized time complexity of O(1) per next call.
+#space complexity: O(n), where n is the number of prices seen so far. In the worst case, all prices are in decreasing order, and we store all of them in the stack, which requires O(n) space.
