@@ -88,3 +88,45 @@ if __name__ == "__main__":
     print(s.calculate("(1+(4+5+2)-3)+(6+8)"))  # return 23  
 # The time complexity of this solution is O(n^2) in the worst case, where n is the length of the input string s. This is because in the worst case, we may have to solve nested brackets recursively, leading to a quadratic number of operations. The space complexity is O(n) due to the stack used for storing intermediate results and the recursive call stack for solving nested brackets.
 #space complexity: O(n) due to the stack used for storing intermediate results and the recursive call stack for solving nested brackets.
+
+
+#optimized solution using stack
+class Solution(object):
+
+    def calculate(self, s):
+
+        stack = []
+        num = 0
+        sign = 1
+        result = 0
+
+        for ch in s:
+
+            if ch.isdigit():
+                num = num * 10 + int(ch)
+
+            elif ch in '+-':
+                result += sign * num
+                sign = 1 if ch == '+' else -1
+                num = 0
+
+            elif ch == '(':
+                stack.append(result)
+                stack.append(sign)
+                result = 0
+                sign = 1
+
+            elif ch == ')':
+                result += sign * num
+                result *= stack.pop()  # sign before the bracket
+                result += stack.pop()  # result calculated before the bracket
+                num = 0
+
+        return result + sign * num
+if __name__ == "__main__":
+    s = Solution()
+    print(s.calculate("1 + 1"))  # return 2
+    print(s.calculate(" 2-1 + 2 "))  # return 3
+    print(s.calculate("(1+(4+5+2)-3)+(6+8)"))  # return 23
+# The time complexity of this solution is O(n), where n is the length of the input string s. We traverse the string once, and each operation (pushing/popping from the stack) takes O(1) time. The space complexity is O(n) in the worst case, due to the stack used for storing intermediate results when we encounter nested brackets.
+#space complexity: O(n) in the worst case, due to the stack used for storing intermediate results when we encounter nested brackets.
