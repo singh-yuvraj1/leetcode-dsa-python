@@ -53,3 +53,43 @@ if name == "__main__":
     print(s.maxSlidingWindow([1], 1))  # return [1]
 #time complexity: O(n*k) beciause we are iterating through the array of length n and for each element, we are iterating through the next k elements to find the maximum.
 #space complexity: O(n-k+1) for the output array, which can be simplified to O(n) in the worst case when k is small compared to n.
+
+
+
+#optimized solution using deque
+from collections import deque
+
+class Solution:
+    def maxSlidingWindow(self, nums, k):
+        dq = deque()
+        ans = []
+
+        # Initialize the deque with the first k elements
+        for i in range(k):
+            while dq and nums[i] > nums[dq[-1]]:
+                dq.pop()
+            dq.append(i)
+
+        # Process the remaining elements
+        for i in range(k, len(nums)):
+            ans.append(nums[dq[0]])
+
+            # Remove the elements that are out of the current window
+            while dq and dq[0] <= i - k:
+                dq.popleft()
+
+            # Add the current element to the deque
+            while dq and nums[i] > nums[dq[-1]]:
+                dq.pop()
+            dq.append(i)
+
+        # Append the maximum of the last window
+        ans.append(nums[dq[0]])
+
+        return ans
+if name == "__main__":
+    s = Solution()
+    print(s.maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3))  # return [3,3,5,5,6,7]
+    print(s.maxSlidingWindow([1], 1))  # return [1]
+#time complexity: O(n) because each element is added and removed from the deque at most once.
+#space complexity: O(k) because the deque can hold at most k indices at any time, which corresponds to the size of the sliding window.  
