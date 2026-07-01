@@ -86,6 +86,58 @@ if __name__ == "__main__":
         print([])      # []
 
 #time complexity: O(n) where n is the number of nodes in the linked list.
-#space complexity: O(n) because we are using an extra array to store the values of the linked list nodes.
+#space complexity: O(1) because we are using only a constant amount of extra space.
 
 
+#optimized solution 
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+class Solution:
+    def reverseList(self, head):
+        prev = None
+        curr = head
+
+        while curr:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+
+        return prev
+
+
+if __name__ == "__main__":
+    s = Solution()
+
+    # Example 1
+    head1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+    reversed_head1 = s.reverseList(head1)
+
+    while reversed_head1:
+        print(reversed_head1.val, end=" ")
+        reversed_head1 = reversed_head1.next
+    print()      # 5 4 3 2 1
+
+    # Example 2
+    head2 = ListNode(1, ListNode(2))
+    reversed_head2 = s.reverseList(head2)
+
+    while reversed_head2:
+        print(reversed_head2.val, end=" ")
+        reversed_head2 = reversed_head2.next
+    print()      # 2 1
+
+    # Example 3
+    head3 = None
+    reversed_head3 = s.reverseList(head3)
+
+    if not reversed_head3:
+        print([])      # []
+
+#time complexity: O(n) where n is the number of nodes in the linked list.
+#space complexity: O(1) because we are using only a constant amount of extra space.
