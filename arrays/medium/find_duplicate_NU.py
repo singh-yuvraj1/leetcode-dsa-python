@@ -50,3 +50,24 @@ if __name__ == "__main__":
 
 
 
+#optimized solution (Floyd's Tortoise and Hare) = O(n) time complexity and O(1) space complexity
+def findDuplicate(nums):
+    # Step 1: Find the intersection point of the two runners.
+    tortoise = nums[0]
+    hare = nums[0]
+
+    while True:
+        tortoise = nums[tortoise]
+        hare = nums[nums[hare]]
+        if tortoise == hare:
+            break
+
+    # Step 2: Find the entrance to the cycle.
+    tortoise = nums[0]
+    while tortoise != hare:
+        tortoise = nums[tortoise]
+        hare = nums[hare]
+
+    return hare
+#time complexity = O(n)  because we are iterating through the array once
+#space complexity = O(1)  because we are not using any extra space like an extra array or set or anything , just we use use variables .
