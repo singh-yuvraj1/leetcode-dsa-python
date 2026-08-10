@@ -31,3 +31,27 @@ def arrangeCoins(n):
 if __name__ == "__main__":
     n = 5
     print(arrangeCoins(n))  # Output: 2
+
+
+#time complexity = O(n)  because we are iterating through the number of coins until we can no longer form a complete row
+#space complexity = O(1)  because we are using a constant amount of space 
+
+
+#optimized solution = O(log n) time complexity and O(1) space complexity
+def arrangeCoins(n):
+    left, right = 0, n
+    while left <= right:
+        mid = left + (right - left) // 2
+        curr = mid * (mid + 1) // 2
+        if curr == n:
+            return mid
+        if curr < n:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return right
+if __name__ == "__main__":
+    n = 5
+    print(arrangeCoins(n))  # Output: 2
+#time complexity = O(log n)  because we are using binary search to find the number of complete rows
+#space complexity = O(1)  because we are using a constant amount of space
