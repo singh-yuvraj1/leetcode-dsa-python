@@ -55,3 +55,5 @@ if __name__ == "__main__":
     print(arrangeCoins(n))  # Output: 2
 #time complexity = O(log n)  because we are using binary search to find the number of complete rows
 #space complexity = O(1)  because we are using a constant amount of space
+
+
